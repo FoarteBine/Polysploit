@@ -1,6 +1,6 @@
 # Polysploit
 
-Polysploit is a script executor for **Polytoria** (and Roblox on Windows). It injects a DLL into the target process, hooks the Luau VM, and exposes a custom Lua API for automation, drawing, and debugging.
+Polysploit is a script executor for **Polytoria**. It injects a DLL into the target process, hooks the Luau VM, and exposes a custom Lua API for automation, drawing, and debugging.
 
 ## Architecture
 
