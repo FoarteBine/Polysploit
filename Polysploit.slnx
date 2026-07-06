@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Injector/Injector.vcxproj" Id="550c6b7a-bf92-43c5-8181-bba34b1c4781" />
+  <Project Path="Polysploit/Polysploit.csproj" />
+  <Project Path="Polysploitlib/Polysploitlib.vcxproj" Id="e57e72e8-f2f9-463d-a623-81c5d5d24edb" />
+</Solution>
