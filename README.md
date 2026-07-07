@@ -1,5 +1,6 @@
 # Polysploit
 
+Status: UP🟢
 Polysploit is a script executor for **Polytoria**. It injects a DLL into the target process, hooks the Luau VM, and exposes a custom Lua API for automation, drawing, and debugging.
 <img width="895" height="594" alt="image" src="https://github.com/user-attachments/assets/d595c7b8-b3a2-4290-bc68-87f2574d4c9b" />
 
