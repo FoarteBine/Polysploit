@@ -1,0 +1,53 @@
+name: Build and Package Release
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
+
+    - name: Restore NuGet Packages
+      run: nuget restore Polysploit.slnx
+
+    - name: Build Solution
+      run: msbuild Polysploit.slnx /p:Configuration=Release /p:Platform="x64"
+
+    - name: Prepare Workspace and Download Others
+      shell: powershell
+      run: |
+        New-Item -ItemType Directory -Force -Path "staged\Polysploit"
+        New-Item -ItemType Directory -Force -Path "temp_others"
+
+        $url = "https://github.com/FoarteBine/Polysploit/releases/download/other/others.zip"
+        Invoke-WebRequest -Uri $url -OutFile "temp_others\others.zip"
+        Expand-Archive -Path "temp_others\others.zip" -DestinationPath "staged\Polysploit" -Force
+
+    - name: Copy All Build Artifacts
+      shell: powershell
+      run: |
+        Copy-Item -Path "x64\Release\*" -Destination "staged\Polysploit" -Recurse -Force
+
+    - name: Create Final Zip Archive
+      shell: powershell
+      run: |
+        Compress-Archive -Path "staged\*" -DestinationPath "Polysploit_Release.zip" -Force
+
+    - name: Upload Artifact to GitHub Actions
+      uses: actions/upload-artifact@v4
+      with:
+        name: Polysploit-Build
+        path: Polysploit_Release.zip
