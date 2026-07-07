@@ -41,13 +41,8 @@ jobs:
       run: |
         Copy-Item -Path "x64\Release\*" -Destination "staged\Polysploit" -Recurse -Force
 
-    - name: Create Final Zip Archive
-      shell: powershell
-      run: |
-        Compress-Archive -Path "staged\*" -DestinationPath "Polysploit_Release.zip" -Force
-
     - name: Upload Artifact to GitHub Actions
       uses: actions/upload-artifact@v4
       with:
-        name: Polysploit-Build
-        path: Polysploit_Release.zip
+        name: Polysploit_Release
+        path: staged/
